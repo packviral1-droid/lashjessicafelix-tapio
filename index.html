@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="tapio-project-id" content="44d3ecaf-89ab-4a39-bae0-51ccf03c58f7">
+  <title>Jéssica Felix BioLink</title>
+  <meta name="description" content="Jéssica Felix BioLink - Bio Link">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Quicksand:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/hero/40c85411-7824-4d51-90fa-f55bf9421973.png" fetchpriority="high">
+  <link rel="preload" as="image" href="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/hero-bg/bae8cbec-9e43-4d81-ac3e-e0f9951e0346.png" fetchpriority="high">
+  <link rel="preload" as="image" href="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/cards/7426683a-28e2-495c-95e6-beede64274d6.png" fetchpriority="high">
+  <link rel="preload" as="image" href="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/cards/4e2e7eac-3225-440f-b790-28a24a3f8ff2.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/cards/2ba0d092-945b-476d-9c07-d0ae596b3a53.png" fetchpriority="high">
+  <style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+body { min-height: 100vh; min-height: 100dvh; background-color: #000000;  font-family: sans-serif; color: #FFFFFF; line-height: 1.5; -webkit-font-smoothing: antialiased; position: relative; }
+.bg-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+img { max-width: 100%; height: auto; display: block; }
+.hero-canva img { max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; }
+.container { max-width: 390px; margin: 0 auto; padding: 16px; min-height: 100vh; min-height: 100dvh; position: relative; z-index: 1; }
+@media (max-width: 480px) { .container { max-width: 100%; } }
+.section-block { width: calc(100% + 32px); margin-left: -16px; margin-right: -16px; }
+.section-inner { max-width: 390px; margin: 0 auto; padding: 0 16px; }
+
+/* Lazy Image Styles */
+.lazy-img-wrapper { position: relative; overflow: hidden; }
+.lazy-img-placeholder { 
+  position: absolute; 
+  inset: 0; 
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.05) 100%);
+  background-size: 200% 200%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+.lazy-img-placeholder.loaded { opacity: 0; pointer-events: none; }
+.lazy-img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  opacity: 0; 
+  transition: opacity 0.25s ease-out; 
+}
+.lazy-img.loaded { opacity: 1; }
+/* Critical images (above the fold) - instant display */
+.lazy-img.eager-load { opacity: 1; }
+.lazy-img.eager-load + .lazy-img-placeholder { display: none; }
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Entry Animation Styles - Dynamic Duration: 350ms */
+
+.animate-block {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 350ms cubic-bezier(0.25, 0.1, 0.25, 1), transform 350ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.animate-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.animate-block.hero-block {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .lazy-img-placeholder { animation: none; }
+  .lazy-img { transition: none; opacity: 1; }
+  .animate-block { opacity: 1; transform: none; transition: none; }
+}
+
+.hero-canva { position: relative; width: 100%; }
+.hero-frame { position: relative; width: 100%; overflow: hidden; }
+.hero-bg { width: 100%; height: 100%; min-height: 320px; display: block; object-position: center; }
+.hero-fade { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.hero-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.hero-content { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; justify-content: center; width: 100%; pointer-events: none; }
+.hero-left { align-items: flex-start; text-align: left; padding: 0 24px; }
+.hero-center { align-items: center; text-align: center; padding: 0 24px; }
+.hero-right { align-items: flex-end; text-align: right; padding: 0 24px; }
+.hero-compact { padding-top: 32px; padding-bottom: 32px; }
+.hero-normal { padding-top: 64px; padding-bottom: 64px; }
+.hero-spacious { padding-top: 96px; padding-bottom: 96px; }
+.hero-title { margin-bottom: 12px; line-height: 1.2; }
+.hero-subtitle { opacity: 0.9; max-width: 320px; line-height: 1.6; }
+
+.card-split { display: flex; overflow: hidden; position: relative; }
+.card-split.no-image { display: block; }
+.card-imageLeft { flex-direction: row; }
+.card-imageRight { flex-direction: row-reverse; }
+.card-image-wrapper { position: relative; width: 40%; aspect-ratio: 1 / 1; overflow: hidden; flex-shrink: 0; }
+.card-image { width: 100%; height: 100%; display: block; }
+.card-image-fade { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.card-content { flex: 1; padding: 16px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.card-content.full-width { width: 100%; }
+.card-title { margin-bottom: 4px; }
+.card-desc { color: #DADADA; margin-bottom: 12px; white-space: pre-wrap; word-break: break-word; }
+.card-button { display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; transition: all 0.2s ease; border: none; flex-shrink: 0; align-self: flex-start; }
+.card-button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+.cta-whatsapp { display: flex; align-items: center; gap: 16px; margin: 16px 12px; padding: 16px; background: #212121; border-radius: 16px; }
+.cta-icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; }
+.cta-icon img { width: 28px; height: 28px; object-fit: contain; }
+.cta-icon svg { width: 24px; height: 24px; }
+.cta-content { flex: 1; min-width: 0; }
+.cta-content h4 { margin-bottom: 2px; }
+.cta-content p { }
+.cta-button { padding: 12px 16px; border-radius: 8px; transition: all 0.2s ease; flex-shrink: 0; }
+.cta-button:hover { transform: scale(1.03); box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35); }
+
+.faq-accordion { margin: 16px 12px; }
+.faq-item { transition: all 0.2s ease; }
+.faq-question { width: 100%; padding: 16px; background: none; border: none; font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: color 0.2s ease; cursor: pointer; }
+.faq-question:hover { opacity: 0.8; }
+.faq-icon { font-size: 20px; font-weight: 300; transition: transform 0.3s ease; flex-shrink: 0; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out; }
+.faq-answer p { font-size: 14px; line-height: 1.6; padding: 0 16px; }
+.faq-item.open .faq-answer { max-height: 500px; padding-bottom: 16px; }
+
+.footer { padding: 32px 24px; text-align: center; }
+.footer p { font-size: 12px; color: #DADADA; }
+
+.footer-empty { transition: all 0.2s ease; }
+.footer-empty-link { transition: opacity 0.2s ease; }
+.footer-empty-link:hover { opacity: 0.8; text-decoration: underline; }
+
+.mini-cta-pill { cursor: pointer; animation: mini-pulse 2.4s ease-in-out infinite; }
+.mini-cta-pill:hover { opacity: 0.9; transform: translateY(-1px); }
+
+@keyframes mini-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 transparent; }
+  50% { transform: scale(1.04); box-shadow: 0 0 18px 4px var(--mini-cta-glow, rgba(168,85,247,0.35)); }
+}
+
+@keyframes bounceArrowDown {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+.image-only-container { transition: all 0.2s ease; }
+.image-only-container:hover { transform: scale(1.01); }
+
+@media (max-width: 480px) {
+  .card-image-wrapper { width: 35%; }
+  .card-content { padding: 12px; }
+}
+
+@media (max-width: 320px) {
+  .card-split:not(.no-image) { flex-direction: column !important; }
+  .card-image-wrapper { width: 100%; height: 160px; aspect-ratio: auto; }
+  .cta-whatsapp { flex-wrap: wrap; }
+  .cta-button { width: 100%; text-align: center; margin-top: 8px; }
+}
+  </style>
+</head>
+<body>
+
+
+  <div class="container" style="display: flex; flex-direction: column; gap: 12px; padding: 0 16px 16px 16px;">
+<div class="animate-block hero-block" data-block-type="HeroCanva">
+    <div class="hero-canva" style="position: relative; width: calc(100% + 32px); margin-left: -16px; margin-right: -16px; margin-top: 0; margin-bottom: 0px; min-height: 320px;" data-tapio-block-id="5028c2aa-58af-47f8-9773-6ead11f40a5a" data-tapio-block-type="HeroCanva" data-tapio-block-index="0" data-tapio-block-title="DEBORA">
+      <div class="hero-frame" style="position: relative; width: 100%; min-height: 320px; max-height: 420px; overflow: hidden; border-radius: 0;">
+        <img src="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/hero-bg/bae8cbec-9e43-4d81-ac3e-e0f9951e0346.png" alt="" class="hero-bg-layer" loading="eager" fetchpriority="high" decoding="sync" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 50%; transform: translate(28px, 109px) scale(2.25); transform-origin: center center; z-index: 0; pointer-events: none;">
+        <img src="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/hero/40c85411-7824-4d51-90fa-f55bf9421973.png" alt="" class="hero-bg" loading="eager" fetchpriority="high" decoding="sync" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 50%; transform: translate(1px, 10px) scale(1.2); transform-origin: center center; z-index: 3; filter: drop-shadow(7px 8px 5px rgba(0,0,0,0.7));">
+        <div class="hero-fade" style="background: linear-gradient(to bottom, transparent 42%, #000000 100%); z-index: 2;"></div>
+        <div class="hero-overlay" style="background: #000000; opacity: 0.35; border-radius: 0;"></div>
+        <div class="hero-content hero-center hero-normal" style="">
+          <h1 class="hero-title" style="font-family: Oswald, sans-serif; font-weight: 700; font-style: normal; font-size: 47px; text-decoration: none; text-transform: none; line-height: 1.2; white-space: pre-wrap; word-break: break-word; text-align: left; margin-bottom: 12px; color: #FFFFFF; transform: translate(0px, 102px);">DEBORA</h1>
+          <p class="hero-subtitle" style="font-family: sans-serif, sans-serif; font-weight: 700; font-style: normal; font-size: 26px; text-decoration: none; text-transform: none; line-height: 1.6; white-space: pre-wrap; word-break: break-word; text-align: left; opacity: 0.9; max-width: 320px; color: #d9a378; transform: translate(0px, 79px);">LASH DESGINER</p>
+        </div>
+      </div>
+    </div></div>
+<div class="animate-block" data-block-type="SocialIcons">
+    <div class="social-icons-block" style="margin: 16px 12px; padding: 16px; border-radius: 16px; box-shadow: none; position: relative; overflow: hidden;" data-tapio-block-id="440fbe41-d866-4237-bd54-e5cbfeec6725" data-tapio-block-type="SocialIcons" data-tapio-block-index="1" data-tapio-block-title="Redes Sociais">
+      <div style="position: absolute; inset: 0; background-color: transparent; opacity: 1; border-radius: 16px;"></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; position: relative; z-index: 1;">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; text-decoration: none;" data-tapio-element-id="440fbe41-d866-4237-bd54-e5cbfeec6725-icon-0" data-tapio-label="whatsapp" data-tapio-href="https://www.instagram.com/" data-tapio-block-id="440fbe41-d866-4237-bd54-e5cbfeec6725" data-tapio-block-type="SocialIcons" data-tapio-block-index="1" data-tapio-element-index="0"><div style="width: 68px; height: 68px; border-radius: 50%; border: 1px solid #c5946d22; background: #c5946d08; box-shadow: 0 0 16px 2px #c5946d18; display: flex; align-items: center; justify-content: center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="#c5946d" style="opacity: 1;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div></a><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; text-decoration: none;" data-tapio-element-id="440fbe41-d866-4237-bd54-e5cbfeec6725-icon-1" data-tapio-label="instagram" data-tapio-href="https://www.instagram.com/" data-tapio-block-id="440fbe41-d866-4237-bd54-e5cbfeec6725" data-tapio-block-type="SocialIcons" data-tapio-block-index="1" data-tapio-element-index="1"><div style="width: 68px; height: 68px; border-radius: 50%; border: 1px solid #c5946d22; background: #c5946d08; box-shadow: 0 0 16px 2px #c5946d18; display: flex; align-items: center; justify-content: center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="#c5946d" style="opacity: 1;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></a><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; text-decoration: none;" data-tapio-element-id="440fbe41-d866-4237-bd54-e5cbfeec6725-icon-2" data-tapio-label="tiktok" data-tapio-href="https://www.instagram.com/" data-tapio-block-id="440fbe41-d866-4237-bd54-e5cbfeec6725" data-tapio-block-type="SocialIcons" data-tapio-block-index="1" data-tapio-element-index="2"><div style="width: 68px; height: 68px; border-radius: 50%; border: 1px solid #c5946d22; background: #c5946d08; box-shadow: 0 0 16px 2px #c5946d18; display: flex; align-items: center; justify-content: center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="#c5946d" style="opacity: 1;"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></div></a>
+      </div>
+      
+    </div></div>
+<div class="animate-block" data-block-type="TextBlock">
+    <div class="text-block-wrapper" style="margin: 16px 0 16px 0; padding: 0 16px;">
+      <p style="color: #FFFFFF;  text-align: center; font-size: 22px; font-weight: 400; line-height: 1.5; font-family: Quicksand, sans-serif; font-style: normal; text-decoration: none; text-transform: none; white-space: pre-wrap; word-break: break-word; margin: 0; text-indent: 0;"><span class="tapio-inline-icon" style="display:inline-flex;align-items:center;margin:0 0.1em;vertical-align:-0.25em;width:1.4em;height:1.4em;line-height:1;"><svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-0.25em;width:1.4em;height:1.4em"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>Meus links:</p>
+    </div></div>
+<div class="animate-block" data-block-type="CardSplit">
+    <div class="card-split-wrapper" style="position: relative; width: 100%; margin: 12px auto; overflow: visible;">
+      
+      <div class="card-split card-imageLeft" style="background-color: #212121;  border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); min-height: 180px; position: relative;  overflow: hidden;" data-tapio-block-id="64afbbce-03e8-4838-ae85-eff0873e8dfe" data-tapio-block-type="CardSplit" data-tapio-block-index="3" data-tapio-block-title="Agendar Meu Horário">
+        
+        <div class="card-fade-overlay" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to left, transparent 50%, #575757 100%); z-index: 0; border-radius: 16px;"></div>
+        
+          <div class="card-image-wrapper lazy-img-wrapper">
+            
+            <img src="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/cards/7426683a-28e2-495c-95e6-beede64274d6.png" alt="" class="card-image lazy-img eager-load" loading="eager" fetchpriority="high" decoding="sync" style="object-fit: contain; object-position: 0% 72%; transform: scale(1.2); transform-origin: 0% 72%; position: relative; z-index: 1; border-radius: 0px; ">
+            
+          </div>
+        <div class="card-content" style="position: relative; z-index: 3;">
+           <h3 class="card-title" style="font-family: Montserrat, sans-serif; font-weight: 700; font-style: normal; font-size: 19px; text-decoration: none; text-transform: none; color: #9E7B5C;  white-space: pre-wrap; word-break: break-word; text-align: left;">Agendar Meu Horário</h3>
+           <p class="card-desc" style="font-family: sans-serif, sans-serif; font-weight: 400; font-style: normal; font-size: 0.875rem; text-decoration: none; text-transform: none; color: #DADADA;  text-align: left;">Garanta seu atendimento com horário reservado.</p>
+          <a href="https://example.com" class="card-button" style="background-color: #B19177;  color: #000000; border-radius: 8px; width: 140px; max-width: 100%;  font-family: sans-serif, sans-serif; font-weight: 600; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; box-shadow: 0px 5.2px 7px #00000038;" target="_blank" rel="noopener noreferrer" data-tapio-element-id="64afbbce-03e8-4838-ae85-eff0873e8dfe-btn-0" data-tapio-label="SAIBA MAIS" data-tapio-href="https://example.com" data-tapio-block-id="64afbbce-03e8-4838-ae85-eff0873e8dfe" data-tapio-block-type="CardSplit" data-tapio-block-index="3" data-tapio-element-index="0">SAIBA MAIS</a>
+        </div>
+      </div>
+      
+      
+    </div></div>
+<div class="animate-block" data-block-type="CardSplit">
+    <div class="card-split-wrapper" style="position: relative; width: 100%; margin: 12px auto; overflow: visible;">
+      
+      <div class="card-split card-imageLeft" style="background-color: #FFFFFF;  border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); min-height: 180px; position: relative;  overflow: hidden;" data-tapio-block-id="d312699f-d8f8-44fe-9096-c56ddc876d44" data-tapio-block-type="CardSplit" data-tapio-block-index="4" data-tapio-block-title="Técnicas Disponíveis">
+        
+        
+          <div class="card-image-wrapper lazy-img-wrapper">
+            
+            <img src="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/cards/4e2e7eac-3225-440f-b790-28a24a3f8ff2.jpg" alt="" class="card-image lazy-img eager-load" loading="eager" fetchpriority="high" decoding="sync" style="object-fit: cover; object-position: 59% 24%; transform: scale(1.1); transform-origin: 59% 24%; position: relative; z-index: 1; border-radius: 0px; ">
+            <div class="card-image-fade" style="background: linear-gradient(to right, transparent 60%, #FFFFFF 100%); z-index: 2;"></div>
+          </div>
+        <div class="card-content" style="position: relative; z-index: 3;">
+           <h3 class="card-title" style="font-family: Montserrat, sans-serif; font-weight: 700; font-style: normal; font-size: 19px; text-decoration: none; text-transform: none; color: #9E7B5C;  white-space: pre-wrap; word-break: break-word; text-align: left;">Técnicas Disponíveis</h3>
+           <p class="card-desc" style="font-family: sans-serif, sans-serif; font-weight: 400; font-style: normal; font-size: 0.875rem; text-decoration: none; text-transform: none; color: #666666;  text-align: left;">Clássico, Volume Brasileiro, Híbrido e Volume Russo.</p>
+          <a href="https://example.com" class="card-button" style="background-color: #B19177;  color: #000000; border-radius: 8px; width: 140px; max-width: 100%;  font-family: sans-serif, sans-serif; font-weight: 600; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; box-shadow: 0px 5.2px 7px #00000038;" target="_blank" rel="noopener noreferrer" data-tapio-element-id="d312699f-d8f8-44fe-9096-c56ddc876d44-btn-0" data-tapio-label="SAIBA MAIS" data-tapio-href="https://example.com" data-tapio-block-id="d312699f-d8f8-44fe-9096-c56ddc876d44" data-tapio-block-type="CardSplit" data-tapio-block-index="4" data-tapio-element-index="0">SAIBA MAIS</a>
+        </div>
+      </div>
+      
+      
+    </div></div>
+<div class="animate-block" data-block-type="CardSplit">
+    <div class="card-split-wrapper" style="position: relative; width: 100%; margin: 12px auto; overflow: visible;">
+      
+      <div class="card-split card-imageRight" style="background-color: #292929;  border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); min-height: 180px; position: relative;  overflow: hidden;" data-tapio-block-id="cb2c0b07-c287-4722-9b63-daff8e02e8ac" data-tapio-block-type="CardSplit" data-tapio-block-index="5" data-tapio-block-title="Falar no WhatsApp">
+        
+        <div class="card-fade-overlay" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, transparent 50%, #636363 100%); z-index: 0; border-radius: 16px;"></div>
+        
+          <div class="card-image-wrapper lazy-img-wrapper">
+            
+            <img src="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/cards/2ba0d092-945b-476d-9c07-d0ae596b3a53.png" alt="" class="card-image lazy-img eager-load" loading="eager" fetchpriority="high" decoding="sync" style="object-fit: cover; object-position: 46% 50%; transform: scale(0.9); transform-origin: 46% 50%; position: relative; z-index: 1; border-radius: 0px; ">
+            
+          </div>
+        <div class="card-content" style="position: relative; z-index: 3;">
+           <h3 class="card-title" style="font-family: Montserrat, sans-serif; font-weight: 700; font-style: normal; font-size: 19px; text-decoration: none; text-transform: none; color: #9E7B5C;  white-space: pre-wrap; word-break: break-word; text-align: left;">Falar no WhatsApp</h3>
+           <p class="card-desc" style="font-family: sans-serif, sans-serif; font-weight: 400; font-style: normal; font-size: 0.875rem; text-decoration: none; text-transform: none; color: #DADADA;  text-align: left;">Tire suas dúvidas e receba orientação personalizada.</p>
+          <a href="https://example.com" class="card-button" style="background-color: #B19177;  color: #000000; border-radius: 8px; width: 140px; max-width: 100%;  font-family: sans-serif, sans-serif; font-weight: 600; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; box-shadow: 0px 5.2px 7px #00000038;" target="_blank" rel="noopener noreferrer" data-tapio-element-id="cb2c0b07-c287-4722-9b63-daff8e02e8ac-btn-0" data-tapio-label="CHAME AQUI" data-tapio-href="https://example.com" data-tapio-block-id="cb2c0b07-c287-4722-9b63-daff8e02e8ac" data-tapio-block-type="CardSplit" data-tapio-block-index="5" data-tapio-element-index="0">CHAME AQUI</a>
+        </div>
+      </div>
+      
+      
+    </div></div>
+<div class="animate-block" data-block-type="TextBlock">
+    <div class="text-block-wrapper" style="margin: 48px 0 24px 0; padding: 0 16px;">
+      <p style="color: #b19177;  text-align: center; font-size: 1.25rem; font-weight: 700; line-height: 1.5; font-family: Poppins, sans-serif; font-style: normal; text-decoration: none; text-transform: none; white-space: pre-wrap; word-break: break-word; margin: 0; text-indent: 0;">RESULTADOS DE CLIENTES:</p>
+    </div></div>
+<div class="animate-block" data-block-type="Carousel">
+    <div class="carousel-block" style="margin: 16px 12px;">
+      
+      <div id="carousel-311d2dfc" class="carousel-container" data-autoplay="true" data-autoplay-speed="3000" data-loop="true" style="position: relative; height: 250px; background-color: transparent; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; padding: 0px;">
+        <div class="carousel-track" style="display: flex; height: 100%; transition: transform 0.3s ease;">
+          <div class="carousel-slide lazy-img-wrapper" style="min-width: 100%; height: 100%; overflow: hidden;"><div class="lazy-img-placeholder"></div><img src="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/carousel/56027e8f-e263-4630-96b8-4ee196712e01.jpg" alt="" class="lazy-img" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transform: scale(1); border-radius: 16px; "></div><div class="carousel-slide lazy-img-wrapper" style="min-width: 100%; height: 100%; overflow: hidden;"><div class="lazy-img-placeholder"></div><img src="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/carousel/5ddf56d9-3096-44ca-86da-e3f2053ea877.jpg" alt="" class="lazy-img" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: 76% 31%; transform: scale(1); border-radius: 16px; "></div><div class="carousel-slide lazy-img-wrapper" style="min-width: 100%; height: 100%; overflow: hidden;"><div class="lazy-img-placeholder"></div><img src="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/carousel/c94a4c25-67fe-4648-80d2-a0806a9bd121.jpg" alt="" class="lazy-img" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: 45% 95%; transform: scale(1); border-radius: 16px; "></div><div class="carousel-slide lazy-img-wrapper" style="min-width: 100%; height: 100%; overflow: hidden;"><div class="lazy-img-placeholder"></div><img src="https://mlwywdyrvneqxvycmaba.supabase.co/storage/v1/object/public/biolink-images/carousel/e2e2b40d-9ad2-4519-b08d-10a53ebf7b5c.jpg" alt="" class="lazy-img" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transform: scale(1); border-radius: 16px; "></div>
+        </div>
+        
+        <button class="carousel-arrow carousel-prev" onclick="moveCarousel('carousel-311d2dfc', -1)" style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; color: white; cursor: pointer;">‹</button>
+        <button class="carousel-arrow carousel-next" onclick="moveCarousel('carousel-311d2dfc', 1)" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; color: white; cursor: pointer;">›</button>
+        
+        <div class="carousel-dots" style="position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px;">
+          <button onclick="goToSlide('carousel-311d2dfc', 0)" style="width: 8px; height: 8px; border-radius: 50%; border: none; background: white; cursor: pointer;"></button><button onclick="goToSlide('carousel-311d2dfc', 1)" style="width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(255,255,255,0.5); cursor: pointer;"></button><button onclick="goToSlide('carousel-311d2dfc', 2)" style="width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(255,255,255,0.5); cursor: pointer;"></button><button onclick="goToSlide('carousel-311d2dfc', 3)" style="width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(255,255,255,0.5); cursor: pointer;"></button>
+        </div>
+      </div>
+    </div></div>
+<div class="animate-block" data-block-type="TextBlock">
+    <div class="text-block-wrapper" style="margin: 48px 0 24px 0; padding: 0 16px;">
+      <p style="color: #a46751;  text-align: center; font-size: 1.25rem; font-weight: 700; line-height: 1.5; font-family: Poppins, sans-serif; font-style: normal; text-decoration: none; text-transform: none; white-space: pre-wrap; word-break: break-word; margin: 0; text-indent: 0;">DÚVIDAS COMUNS</p>
+    </div></div>
+<div class="animate-block" data-block-type="FAQAccordion">
+    <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 12px;">
+      
+      <div class="faq-item" data-faq="0" style="background-color: #2d2520;  border-radius: 16px;  overflow: hidden;">
+        <button class="faq-question" type="button" style="font-family: Montserrat, sans-serif; font-weight: 600; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; color: #FFFFFF;  text-align: left;">1. ESCREVA AS DÚVIDAS DA SUA CLIENTE<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><p style="font-family: sans-serif, sans-serif; font-weight: 400; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; color: #DADADA;  text-align: left; white-space: pre-wrap; word-break: break-word;">Responda essa dúvida </p></div>
+      </div>
+      <div class="faq-item" data-faq="1" style="background-color: #2d2520;  border-radius: 16px;  overflow: hidden;">
+        <button class="faq-question" type="button" style="font-family: Montserrat, sans-serif; font-weight: 600; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; color: #FFFFFF;  text-align: left;">2. ESCREVA AS DÚVIDAS DA SUA CLIENTE<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><p style="font-family: sans-serif, sans-serif; font-weight: 400; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; color: #DADADA;  text-align: left; white-space: pre-wrap; word-break: break-word;">Responda essa dúvida </p></div>
+      </div>
+      <div class="faq-item" data-faq="2" style="background-color: #2d2520;  border-radius: 16px;  overflow: hidden;">
+        <button class="faq-question" type="button" style="font-family: Montserrat, sans-serif; font-weight: 600; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; color: #FFFFFF;  text-align: left;">3. ESCREVA AS DÚVIDAS DA SUA CLIENTE<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><p style="font-family: sans-serif, sans-serif; font-weight: 400; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; color: #DADADA;  text-align: left; white-space: pre-wrap; word-break: break-word;">Responda essa dúvida </p></div>
+      </div>
+    </div></div>
+<div class="animate-block" data-block-type="MiniCta">
+    <div class="mini-cta-wrapper" style="display: flex; justify-content: center; margin: 16px 0 16px 0; padding: 0 12px;" data-tapio-block-id="04e99087-aa72-4a9b-a1ee-ea15851bf559" data-tapio-block-type="MiniCta" data-tapio-block-index="10" data-tapio-block-title="ENTRAR EM CONTATO AGORA">
+      <a href="https://example.com" class="mini-cta-pill" 
+         target="_blank" rel="noopener noreferrer"
+         style="--mini-cta-glow: rgba(177,145,119,0.35); display: inline-block; width: auto; padding: 16px 48px; 
+                background-color: #B19177;  color: #000000; 
+                border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                font-family: sans-serif, sans-serif; font-weight: 600; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; text-align: center; letter-spacing: 0.5px;"
+         data-tapio-element-id="04e99087-aa72-4a9b-a1ee-ea15851bf559-btn-0" data-tapio-label="ENTRAR EM CONTATO AGORA" data-tapio-href="https://example.com" data-tapio-block-id="04e99087-aa72-4a9b-a1ee-ea15851bf559" data-tapio-block-type="MiniCta" data-tapio-block-index="10" data-tapio-element-index="0">
+        ENTRAR EM CONTATO AGORA
+      </a>
+    </div></div>
+  </div>
+  <script>
+(function() {
+  'use strict';
+  
+  // Animation config
+  var ANIM_BASE_DELAY = 60;
+  var ANIM_SCOPE = 'all';
+  
+  // ========== LAZY IMAGE LOADING ==========
+  // Handles lazy loading with placeholder and fade-in
+  function initLazyImages() {
+    var lazyImages = document.querySelectorAll('.lazy-img');
+    
+    lazyImages.forEach(function(img) {
+      // Skip eager-load images (already visible)
+      if (img.classList.contains('eager-load')) {
+        img.classList.add('loaded');
+        var placeholder = img.parentElement.querySelector('.lazy-img-placeholder');
+        if (placeholder) placeholder.classList.add('loaded');
+        return;
+      }
+      
+      // Handle already loaded images
+      if (img.complete && img.naturalWidth > 0) {
+        img.classList.add('loaded');
+        var placeholder = img.parentElement.querySelector('.lazy-img-placeholder');
+        if (placeholder) placeholder.classList.add('loaded');
+        return;
+      }
+      
+      // Add load handler
+      img.addEventListener('load', function() {
+        img.classList.add('loaded');
+        var placeholder = img.parentElement.querySelector('.lazy-img-placeholder');
+        if (placeholder) placeholder.classList.add('loaded');
+      });
+    });
+  }
+  
+  // ========== ENTRY ANIMATIONS ==========
+  // IntersectionObserver for staggered entrance animations
+  function initEntryAnimations() {
+    var blocks = document.querySelectorAll('.animate-block');
+    if (!blocks.length) return;
+    
+    // Check for reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      blocks.forEach(function(b) { b.classList.add('visible'); });
+      return;
+    }
+    
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var block = entry.target;
+          var delay = parseInt(block.getAttribute('data-delay')) || 0;
+          setTimeout(function() {
+            block.classList.add('visible');
+          }, delay);
+          observer.unobserve(block);
+        }
+      });
+    }, { rootMargin: '120px', threshold: 0 });
+    
+    var animIndex = 0;
+    blocks.forEach(function(block) {
+      // Hero blocks animate immediately
+      if (block.classList.contains('hero-block')) {
+        block.classList.add('visible');
+        return;
+      }
+      // Calculate stagger delay using config (max 600ms)
+      var delay = Math.min(animIndex * ANIM_BASE_DELAY, 600);
+      block.setAttribute('data-delay', delay);
+      observer.observe(block);
+      animIndex++;
+    });
+  }
+  
+  // ========== FAQ ACCORDION ==========
+  document.querySelectorAll('.faq-item .faq-question').forEach(function(button) {
+    button.addEventListener('click', function() {
+      var item = this.parentElement;
+      item.classList.toggle('open');
+    });
+  });
+  
+  // ========== SMOOTH SCROLL ==========
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+  
+  // ========== CAROUSEL ==========
+  window.carouselState = {};
+  document.querySelectorAll('.carousel-container').forEach(function(c) {
+    var slides = c.querySelectorAll('.carousel-slide');
+    window.carouselState[c.id] = { index: 0, total: slides.length };
+  });
+  window.moveCarousel = function(id, dir) {
+    var s = window.carouselState[id]; if (!s) return;
+    s.index = (s.index + dir + s.total) % s.total;
+    var t = document.querySelector('#' + id + ' .carousel-track');
+    if (t) t.style.transform = 'translateX(-' + (s.index * 100) + '%)';
+    document.querySelectorAll('#' + id + ' .carousel-dots button').forEach(function(d, i) {
+      d.style.background = i === s.index ? 'white' : 'rgba(255,255,255,0.5)';
+    });
+  };
+  window.goToSlide = function(id, idx) {
+    var s = window.carouselState[id]; if (!s) return;
+    s.index = idx;
+    var t = document.querySelector('#' + id + ' .carousel-track');
+    if (t) t.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    document.querySelectorAll('#' + id + ' .carousel-dots button').forEach(function(d, i) {
+      d.style.background = i === idx ? 'white' : 'rgba(255,255,255,0.5)';
+    });
+  };
+  // Autoplay logic for exported carousel
+  document.querySelectorAll('.carousel-container[data-autoplay="true"]').forEach(function(c) {
+    var speed = parseInt(c.getAttribute('data-autoplay-speed')) || 3000;
+    var loop = c.getAttribute('data-loop') === 'true';
+    var slides = c.querySelectorAll('.carousel-slide');
+    if (slides.length <= 1) return;
+    setInterval(function() {
+      var s = window.carouselState[c.id];
+      if (!s) return;
+      if (loop) {
+        s.index = (s.index + 1) % s.total;
+      } else if (s.index < s.total - 1) {
+        s.index++;
+      }
+      var t = c.querySelector('.carousel-track');
+      if (t) t.style.transform = 'translateX(-' + (s.index * 100) + '%)';
+      c.querySelectorAll('.carousel-dots button').forEach(function(d, i) {
+        d.style.background = i === s.index ? 'white' : 'rgba(255,255,255,0.5)';
+      });
+    }, speed);
+  });
+  
+  // ========== EMAIL FORM ==========
+  window.handleEmailSubmit = function(e, destEmail, subject) {
+    e.preventDefault();
+    var form = e.target;
+    var name = form.querySelector('[name="name"]').value;
+    var email = form.querySelector('[name="email"]').value;
+    var message = form.querySelector('[name="message"]').value;
+    var body = 'Nome: ' + name + '%0D%0AEmail: ' + email + '%0D%0A%0D%0AMensagem:%0D%0A' + encodeURIComponent(message);
+    window.location.href = 'mailto:' + destEmail + '?subject=' + encodeURIComponent(subject) + '&body=' + body;
+  };
+  
+  // ========== INIT ON DOM READY ==========
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initLazyImages();
+      initEntryAnimations();
+    });
+  } else {
+    initLazyImages();
+    initEntryAnimations();
+  }
+})();
+
+  </script>
+   <script>
+   (function(){
+     'use strict';
+     var EP='https://mlwywdyrvneqxvycmaba.supabase.co/functions/v1/track-event';
+     var pid=document.querySelector('meta[name="tapio-project-id"]');
+     if(!pid)return;
+     var P=pid.getAttribute('content');
+
+     // Environment detection — only Lovable/localhost are preview
+     // Everything else is prod (dashboard filters by exact URL)
+     var h=location.hostname.toLowerCase();
+     var env=(h.indexOf('lovable.app')!==-1||h.indexOf('lovable.dev')!==-1||h==='localhost'||h==='127.0.0.1'||h==='0.0.0.0')?'preview':'prod';
+
+     // Canonical page_url: origin + pathname (no query/hash)
+     var canonicalUrl=(location.origin+location.pathname).substring(0,500);
+
+     // Visitor ID (persistent across sessions)
+     var vid=localStorage.getItem('tapio_vid');
+     if(!vid){vid=Math.random().toString(36).substr(2,12);localStorage.setItem('tapio_vid',vid);}
+
+     // Session ID (per browser session)
+     var sid=sessionStorage.getItem('tapio_sid');
+     if(!sid){sid=Math.random().toString(36).substr(2,12);sessionStorage.setItem('tapio_sid',sid);}
+
+     function send(payload){
+       payload.project_id=P;
+       payload.page_url=canonicalUrl;
+       payload.visitor_id=vid;
+       payload.session_id=sid;
+       payload.referrer=(document.referrer||'').substring(0,500);
+       payload.user_agent=(navigator.userAgent||'').substring(0,300);
+       payload.screen_w=screen.width;
+       payload.screen_h=screen.height;
+       payload.viewport_w=innerWidth;
+       payload.viewport_h=innerHeight;
+        var params=new URLSearchParams(location.search);
+        var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';}catch(e){}
+        var lang=(navigator.language||navigator.userLanguage||'').substring(0,10);
+        payload.meta={env:env,tz:tz,lang:lang,utm_source:params.get('utm_source')||params.get('src')||'',utm_medium:params.get('utm_medium')||'',utm_campaign:params.get('utm_campaign')||''};
+       fetch(EP,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true,credentials:'omit'}).catch(function(){});
+     }
+
+     // View: not in iframe, only if visible, 1 view per session per page
+     if(window.top===window.self&&document.visibilityState==='visible'){
+       var viewKey='tapio_viewed_'+canonicalUrl+'_'+sid;
+       if(!sessionStorage.getItem(viewKey)){
+         sessionStorage.setItem(viewKey,'1');
+         send({event_type:'view'});
+       }
+      }
+
+      // Block view tracking via IntersectionObserver
+      var blockViewKey='tapio_bv_'+sid+'_';
+      if('IntersectionObserver' in window){
+        var obs=new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(!entry.isIntersecting)return;
+            var b=entry.target;
+            var bid=b.getAttribute('data-tapio-block-id');
+            if(!bid)return;
+            var bvk=blockViewKey+bid;
+            if(sessionStorage.getItem(bvk))return;
+            sessionStorage.setItem(bvk,'1');
+            send({
+              event_type:'block_view',
+              block_id:bid,
+              block_type:b.getAttribute('data-tapio-block-type'),
+              block_title:(b.getAttribute('data-tapio-block-title')||(function(){var h=b.querySelector('h3,h2,h1,.card-title');return h?(h.textContent||'').trim().substring(0,120):null;})()),
+              block_index:b.getAttribute('data-tapio-block-index')?parseInt(b.getAttribute('data-tapio-block-index')):null
+            });
+          });
+        },{threshold:0.3});
+        setTimeout(function(){
+          document.querySelectorAll('[data-tapio-block-id]').forEach(function(el){obs.observe(el);});
+        },500);
+      }
+
+      // FAQ expand tracking
+      document.addEventListener('click',function(e){
+        var detail=e.target.closest('[data-tapio-block-type="FAQAccordion"] [data-state]');
+        if(!detail)return;
+        var bc=detail.closest('[data-tapio-block-id]');
+        if(!bc)return;
+        var question=(detail.querySelector('button')||detail).textContent||'';
+        question=question.trim().substring(0,120);
+        send({
+          event_type:'faq_expand',
+          block_id:bc.getAttribute('data-tapio-block-id'),
+          block_type:'FAQAccordion',
+          block_title:bc.getAttribute('data-tapio-block-title')||question,
+          block_index:bc.getAttribute('data-tapio-block-index')?parseInt(bc.getAttribute('data-tapio-block-index')):null,
+          element_label:question
+        });
+      },true);
+
+     // Click debounce map (300ms per element_id)
+     var lastClick={};
+
+     // Click delegation
+     document.addEventListener('click',function(e){
+       var el=e.target.closest('a[href],button,[role="button"],[data-tapio-element-id]');
+       if(!el)return;
+       var eid=el.getAttribute('data-tapio-element-id')||el.id||null;
+       var label=el.getAttribute('data-tapio-label')||(el.innerText||'').trim().substring(0,120)||'clique';
+       var href=el.getAttribute('data-tapio-href')||el.getAttribute('href')||null;
+
+       // Debounce: 300ms per element
+       var debounceKey=eid||label;
+       var now=Date.now();
+       if(lastClick[debounceKey]&&now-lastClick[debounceKey]<300)return;
+       lastClick[debounceKey]=now;
+
+       // Walk up to find block container for block_title
+       var bc=el.closest('[data-tapio-block-id]');
+       var blockTitle=bc?bc.getAttribute('data-tapio-block-title'):null;
+       // Fallback: if attribute missing/empty, read heading text via textContent
+       if(!blockTitle&&bc){
+         var heading=bc.querySelector('h3,h2,h1,.card-title');
+         if(heading)blockTitle=(heading.textContent||'').trim().substring(0,120);
+       }
+
+       send({
+         event_type:'click',
+         element_id:eid,
+         element_label:label,
+         element_href:href?href.substring(0,500):null,
+         block_id:el.getAttribute('data-tapio-block-id')||(bc?bc.getAttribute('data-tapio-block-id'):null),
+         block_type:el.getAttribute('data-tapio-block-type')||(bc?bc.getAttribute('data-tapio-block-type'):null),
+         block_title:blockTitle?(blockTitle).substring(0,120):null,
+         block_index:el.getAttribute('data-tapio-block-index')?parseInt(el.getAttribute('data-tapio-block-index')):(bc&&bc.getAttribute('data-tapio-block-index')?parseInt(bc.getAttribute('data-tapio-block-index')):null),
+         element_index:el.getAttribute('data-tapio-element-index')?parseInt(el.getAttribute('data-tapio-element-index')):null,
+         click_x:e.clientX,
+         click_y:e.clientY,
+         scroll_y:Math.round(window.scrollY)
+       });
+     },true);
+   })();
+   </script>
+</body>
+</html>
